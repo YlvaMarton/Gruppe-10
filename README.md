@@ -421,62 +421,41 @@ void nerveSignalVA() {                                                         /
 }
 
 
+
 //------- signal før knappen skal begynne å lyse ----------
 
-void nerveSignalHAG() {
-  for (int i = 12; i != 2; i --) {                                           // motsatt vei av nervesignalet
-    strip.setPixelColor(i, strip.Color(100, 100, 100));                      // setter fargen til hvit
-    strip.setPixelColor(i + 1, strip.Color(0, 0, 0));                        // Skur av forrige led-stripe lys
-    strip.show();                                                               
-    delay(10);                                                                   
+void pulse(int start, int end, int step) {                               // generell kode
+  for (int i = start; i != end; i += step) { 
+    strip.setPixelColor(i, strip.Color(100, 100, 100));                  // setter fargen til rød
+    strip.setPixelColor(i - step, strip.Color(0, 0, 0));                 // slukker forrige pixel
+    strip.show();
+    delay(10);
   }
-  strip.setPixelColor(3, strip.Color(0, 0, 0));
+  strip.setPixelColor(end - step, strip.Color(0, 0, 0));                 // slukker alle pixler
   strip.show();
 }
 
-void nerveSignalHBG() {
-  for (int i = 36; i != 46; i ++) {                                           // motsatt vei av nervesignalet
-    strip.setPixelColor(i, strip.Color(100, 100, 100));                       // setter fargen til hvit
-    strip.setPixelColor(i - 1, strip.Color(0, 0, 0));                         // Skur av forrige led-stripe lys
-    strip.show();                                                                 
-    delay(10);                                                                    
+void nerveSignalHAG() {                                            // for høyre arm
+  pulse(12, 2, -1); 
   }
-  strip.setPixelColor(45, strip.Color(0, 0, 0));
-  strip.show();
-}
+                               
+void nerveSignalHBG() {                                            // for høyre bein 
+  pulse(36, 46, 1); 
+  }
+  
+void nerveSignalHG() {                                            // for hodet 
+  pulse(54, 50, -1); 
+  }
+  
+void nerveSignalVBG() {                                            // for venstre bein 
+  pulse(13, 22, 1); 
+  }
+void nerveSignalVAG() {                                            // for venstre arm 
+  pulse(36, 26, -1); 
+  }
 
-void nerveSignalHG() {
-  for (int i = 54; i != 50; i --) {                                           // motsatt vei av nervesignalet
-    strip.setPixelColor(i, strip.Color(100, 100, 100));                       // setter fargen til hvit
-    strip.setPixelColor(i + 1, strip.Color(0, 0, 0));                         // Skur av forrige led-stripe lys
-    strip.show();                                                            
-    delay(10);                                                                
-  }
-  strip.setPixelColor(51, strip.Color(0, 0, 0));
-  strip.show();
-}
 
-void nerveSignalVBG() {
-  for (int i = 13; i != 22; i ++) {                                           // motsatt vei av nervesignalet
-    strip.setPixelColor(i, strip.Color(100, 100, 100));                       // setter fargen til hvit
-    strip.setPixelColor(i - 1, strip.Color(0, 0, 0));                         // Skur av forrige led-stripe lys
-    strip.show();                                                             
-    delay(10);                                                                
-  }
-  strip.setPixelColor(21, strip.Color(0, 0, 0));
-  strip.show();
-}
 
-void nerveSignalVAG() {
-  for (int i = 36; i != 26; i --) {                                          // motsatt vei av nervesignalet
-    strip.setPixelColor(i, strip.Color(100, 100, 100));                      // setter fargen til hvit
-    strip.setPixelColor(i + 1, strip.Color(0, 0, 0));                        // Skur av forrige led-stripe lys
-    strip.show();                                                           
-    delay(10);                                                             
-  }
-  strip.setPixelColor(27, strip.Color(0, 0, 0));
-  strip.show();
-}
 
 
 
